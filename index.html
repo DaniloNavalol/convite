@@ -169,10 +169,11 @@
         }
 
         .modal-overlay h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem; 
             margin-bottom: 20px;
             border-bottom: 1px solid #d4af37;
             padding-bottom: 10px;
+            text-align: center;
         }
 
         .close-modal {
@@ -186,27 +187,44 @@
             background: transparent;
         }
 
-        /* ESTILO DA LISTA: MELHORADO */
+        /* ESTILO DA LISTA DE PRESENTES */
         .styled-list { 
             list-style: none; 
             padding: 0; 
             text-align: left; 
         }
         .styled-list li {
-            margin: 15px 0; 
-            font-size: 0.95rem;
+            margin: 12px 0; 
+            font-size: 0.9rem;
             color: #f0e68c;
             display: flex;
-            align-items: flex-start; 
+            align-items: center; 
             line-height: 1.4; 
         }
         .styled-list li i { 
             margin-right: 12px; 
-            margin-top: 5px; 
             color: #d4af37; 
-            font-size: 1.1rem; 
+            font-size: 1rem; 
+            width: 20px; 
+            text-align: center;
             flex-shrink: 0; 
         }
+
+        /* ESTILOS DOS CAMPOS DE TEXTO (INPUTS) */
+        .gold-input {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid #d4af37;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-family: sans-serif;
+            outline: none;
+        }
+        .gold-input::placeholder { color: rgba(255,255,255,0.5); }
+        .gold-input:focus { border-color: #fff; box-shadow: 0 0 5px #d4af37; }
+
 
         .hidden { opacity: 0 !important; pointer-events: none; transition: opacity 0.8s ease;}
         .visible { opacity: 1 !important; visibility: visible !important; }
@@ -233,33 +251,27 @@
         </div>
         
         <div id="click-gift" class="hotspot" title="Lista de Presentes"></div>
-        <div id="click-book" class="hotspot" title="Mensagens"></div>
+        <div id="click-book" class="hotspot" title="Confirmar Presença"></div>
 
 
         <div id="gift-modal" class="modal-overlay">
             <div class="modal-content-box">
                 <button class="close-modal" id="close-gift"><i class="fas fa-times"></i></button>
-                <h2>O Tesouro de Ellem</h2>
-                <p style="color: #f0e68c; font-size: 0.9rem; margin-bottom: 20px;">
-                    A sua presença é a nossa maior festa! Se desejar presentear, aqui estão algumas sugestões para a nossa jornada:
+                <h2>Sugestões de Presentes</h2>
+                <p style="color: #f0e68c; font-size: 0.85rem; margin-bottom: 20px;">
+                    A sua presença é o maior presente! Mas se desejar agradar a aniversariante, aqui estão as sugestões:
                 </p>
                 <ul class="styled-list">
-                    <li>
-                        <i class="fas fa-plane-departure"></i> 
-                        Cotas para a Viagem dos Sonhos (Disney ou Paris)
-                    </li>
-                    <li>
-                        <i class="fas fa-ticket-alt"></i> 
-                        Cotas para o Vestido de Princesa
-                    </li>
-                    <li>
-                        <i class="fas fa-gift"></i> 
-                        Lista na Camicado ou Lojas de Decoração
-                    </li>
-                    <li>
-                        <i class="fab fa-pix"></i> 
-                        Tesouro Direto (PIX Chave: ellem.vitoria@exemplo.com)
-                    </li>
+                    <li><i class="fas fa-tshirt"></i> Roupas: Tam M/38</li>
+                    <li><i class="fas fa-shoe-prints"></i> Sapatos em geral: Tam 37</li>
+                    <li><i class="far fa-gem"></i> Acessórios prata</li>
+                    <li><i class="fas fa-shopping-bag"></i> Bolsas</li>
+                    <li><i class="fas fa-spray-can"></i> Perfumes/Body Splash</li>
+                    <li><i class="fas fa-pump-soap"></i> Hidratante corporal</li>
+                    <li><i class="fas fa-spa"></i> Produtos de Cabelo</li>
+                    <li><i class="fas fa-magic"></i> Produtos de Maquiagens</li>
+                    <li><i class="fas fa-heart"></i> Produtos de Autocuidado</li>
+                    <li><i class="fab fa-pix"></i> Pix: 99 98552‑9358</li>
                 </ul>
             </div>
         </div>
@@ -267,15 +279,17 @@
         <div id="book-modal" class="modal-overlay">
              <div class="modal-content-box">
                 <button class="close-modal" id="close-book"><i class="fas fa-times"></i></button>
-                <h2><i class="fas fa-feather-alt"></i> Livro de Recados</h2>
+                <h2><i class="fas fa-calendar-check"></i> Confirmação</h2>
+                
                 <p style="color: #f0e68c; font-size: 0.9rem; margin-bottom: 15px;">
-                    Deixe uma mensagem para Ellem Vitória antes de cair na toca do coelho!
+                    Confirme sua presença antes de cair na toca do coelho!
                 </p>
                 
-                <textarea id="msg-input" placeholder="Escreva seu recado..." style="width: 100%; height: 80px; background: rgba(0,0,0,0.3); border: 1px solid #d4af37; color: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px; font-family: sans-serif; resize: none;"></textarea>
+                <input type="text" id="name-input" class="gold-input" placeholder="Seu Nome Completo">
+                <textarea id="obs-input" class="gold-input" placeholder="Alguma observação? (Ex: Levarei acompanhante)" style="height: 80px; resize: none;"></textarea>
                 
                 <button id="btn-send" style="width: 100%; padding: 10px; background: #d4af37; border: none; color: #000; font-weight: bold; border-radius: 5px; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                    Enviar via WhatsApp <i class="fab fa-whatsapp"></i>
+                    Confirmar Presença <i class="fab fa-whatsapp"></i>
                 </button>
             </div>
         </div>
@@ -298,7 +312,8 @@
         const closeBookBtn = document.getElementById('close-book');
 
         // NOVAS CONSTANTES PARA O ENVIO
-        const msgInput = document.getElementById('msg-input');
+        const nameInput = document.getElementById('name-input');
+        const obsInput = document.getElementById('obs-input');
         const btnSend = document.getElementById('btn-send');
 
         // --- ANIMAÇÃO ---
@@ -335,30 +350,31 @@
             if (e.target === bookModal) bookModal.classList.remove('show');
         });
 
-        // --- LÓGICA DE ENVIO WHATSAPP (AQUI É A MÁGICA) ---
+        // --- LÓGICA DE CONFIRMAÇÃO WHATSAPP ---
         btnSend.addEventListener('click', () => {
-            const texto = msgInput.value;
+            const nome = nameInput.value;
+            const obs = obsInput.value;
             
-            // Validação simples
-            if(texto.trim() === "") {
-                alert("O coelho branco diz: Escreva uma mensagem antes de enviar!");
+            if(nome.trim() === "") {
+                alert("O coelho branco diz: Preencha seu nome para confirmar!");
                 return;
             }
 
             // --- CONFIGURE AQUI O NÚMERO ---
-            // Coloque o código do país (55) + DDD + Número. Ex: 5511999999999
             const numeroWhatsApp = "559884938495"; 
             
-            // Cria a mensagem e o link
-            // encodeURIComponent transforma espaços e acentos em código para URL
-            const mensagemFormatada = `Olá! Vim pelo convite e deixo meu recado para Ellem Vitória:\n\n"${texto}"`;
+            let mensagemFormatada = `Olá! Gostaria de *CONFIRMAR MINHA PRESENÇA* no aniversário de Ellem Vitória.\n\n👤 *Nome:* ${nome}`;
+            
+            if(obs.trim() !== "") {
+                mensagemFormatada += `\n📝 *Obs:* ${obs}`;
+            }
+
             const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemFormatada)}`;
 
-            // Abre o WhatsApp numa nova aba
             window.open(url, '_blank');
             
-            // Limpa o campo e fecha o modal
-            msgInput.value = "";
+            nameInput.value = "";
+            obsInput.value = "";
             bookModal.classList.remove('show');
         });
 
