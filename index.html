@@ -272,9 +272,11 @@
                     Deixe uma mensagem para Ellem Vitória antes de cair na toca do coelho!
                 </p>
                 
-                <textarea style="width: 100%; height: 80px; background: rgba(0,0,0,0.3); border: 1px solid #d4af37; color: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px; font-family: sans-serif;"></textarea>
+                <textarea id="msg-input" placeholder="Escreva seu recado..." style="width: 100%; height: 80px; background: rgba(0,0,0,0.3); border: 1px solid #d4af37; color: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px; font-family: sans-serif; resize: none;"></textarea>
                 
-                <button style="width: 100%; padding: 10px; background: #d4af37; border: none; color: #000; font-weight: bold; border-radius: 5px; cursor: pointer; font-family: inherit;">Enviar</button>
+                <button id="btn-send" style="width: 100%; padding: 10px; background: #d4af37; border: none; color: #000; font-weight: bold; border-radius: 5px; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    Enviar via WhatsApp <i class="fab fa-whatsapp"></i>
+                </button>
             </div>
         </div>
 
@@ -294,6 +296,10 @@
         const bookModal = document.getElementById('book-modal');
         const closeGiftBtn = document.getElementById('close-gift');
         const closeBookBtn = document.getElementById('close-book');
+
+        // NOVAS CONSTANTES PARA O ENVIO
+        const msgInput = document.getElementById('msg-input');
+        const btnSend = document.getElementById('btn-send');
 
         // --- ANIMAÇÃO ---
         letter.addEventListener('click', () => {
@@ -317,7 +323,7 @@
             }, 500);
         });
         
-        // --- EVENTOS DOS BOTOES ---
+        // --- EVENTOS DOS MODAIS ---
         clickGift.addEventListener('click', () => giftModal.classList.add('show'));
         closeGiftBtn.addEventListener('click', () => giftModal.classList.remove('show'));
         
@@ -328,6 +334,34 @@
             if (e.target === giftModal) giftModal.classList.remove('show');
             if (e.target === bookModal) bookModal.classList.remove('show');
         });
+
+        // --- LÓGICA DE ENVIO WHATSAPP (AQUI É A MÁGICA) ---
+        btnSend.addEventListener('click', () => {
+            const texto = msgInput.value;
+            
+            // Validação simples
+            if(texto.trim() === "") {
+                alert("O coelho branco diz: Escreva uma mensagem antes de enviar!");
+                return;
+            }
+
+            // --- CONFIGURE AQUI O NÚMERO ---
+            // Coloque o código do país (55) + DDD + Número. Ex: 5511999999999
+            const numeroWhatsApp = "559884938495"; 
+            
+            // Cria a mensagem e o link
+            // encodeURIComponent transforma espaços e acentos em código para URL
+            const mensagemFormatada = `Olá! Vim pelo convite e deixo meu recado para Ellem Vitória:\n\n"${texto}"`;
+            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemFormatada)}`;
+
+            // Abre o WhatsApp numa nova aba
+            window.open(url, '_blank');
+            
+            // Limpa o campo e fecha o modal
+            msgInput.value = "";
+            bookModal.classList.remove('show');
+        });
+
     </script>
 </body>
 </html>
